@@ -14,5 +14,10 @@
     "next": "13.2.4",
     "react": "18.2.0",
     "react-dom": "18.2.0"
+  },
+  "devDependencies": {
+    "@trivago/prettier-plugin-sort-imports": "^4.1.1",
+    "eslint-config-prettier": "^8.8.0",
+    "prettier": "^2.8.7"
   }
 }
