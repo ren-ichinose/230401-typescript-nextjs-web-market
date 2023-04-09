@@ -1,3 +1,4 @@
+import { Types } from 'mongoose';
 import { NextApiRequest } from 'next';
 
 export interface ItemDataType {
@@ -24,6 +25,15 @@ export interface ExtendedNextApiRequestAuth extends NextApiRequest {
   };
 }
 
+export interface ExtendedNextApiRequestUser extends NextApiRequest {
+  body: UserDataType;
+}
+
+export interface FindUser extends UserDataType {
+  _id: Types.ObjectId;
+}
+
 export interface ResMessageType {
   message: string;
+  accessToken?: string;
 }
