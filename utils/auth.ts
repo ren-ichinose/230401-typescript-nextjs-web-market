@@ -1,19 +1,6 @@
-import { NextApiRequest, NextApiResponse } from 'next';
+import { NextApiResponse } from 'next';
+import { ExtendedNextApiRequestAuth, ResMessageType, payload } from './types';
 import jwt from 'jsonwebtoken';
-
-interface payload {
-  email: string;
-}
-
-interface ExtendedNextApiRequestAuth extends NextApiRequest {
-  body: {
-    email: string;
-  };
-}
-
-interface ResMessageType {
-  message: string;
-}
 
 const auth = (handler: Function) => {
   return async (
