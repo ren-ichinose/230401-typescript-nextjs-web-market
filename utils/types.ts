@@ -1,5 +1,5 @@
-import { Types } from 'mongoose';
 import { NextApiRequest } from 'next';
+import { Types } from 'mongoose';
 
 export interface ItemDataType {
   title: string;
@@ -29,11 +29,29 @@ export interface ExtendedNextApiRequestUser extends NextApiRequest {
   body: UserDataType;
 }
 
+export interface ExtendedNextApiRequestItem extends NextApiRequest {
+  body: ItemDataType;
+}
+
 export interface FindUser extends UserDataType {
+  _id: Types.ObjectId;
+}
+
+export interface FindItem extends ItemDataType {
   _id: Types.ObjectId;
 }
 
 export interface ResMessageType {
   message: string;
   accessToken?: string;
+}
+
+export interface ResReadAllType {
+  message: string;
+  allItems?: FindItem[];
+}
+
+export interface ResReadSingleType {
+  message: string;
+  singleItem?: FindItem;
 }
