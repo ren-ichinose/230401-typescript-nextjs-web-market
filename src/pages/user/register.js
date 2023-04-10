@@ -1,9 +1,19 @@
 import { useState } from 'react';
 
 const Register = () => {
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [newUser, setNewUser] = useState({
+    name: '',
+    email: '',
+    password: '',
+  });
+  const { name, email, password } = newUser;
+
+  const handleChange = (e) => {
+    setNewUser({
+      ...newUser,
+      [e.target.name]: e.target.value,
+    });
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -16,7 +26,7 @@ const Register = () => {
             Accept: 'application/json',
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ name, email, password }),
+          body: JSON.stringify(newUser),
         }
       );
       const { message } = await res.json();
@@ -36,19 +46,15 @@ const Register = () => {
           placeholder="name"
           required
           value={name}
-          onChange={(e) => {
-            setName(e.target.value);
-          }}
+          onChange={handleChange}
         />
         <input
           type="text"
           name="email"
           placeholder="email"
-          requireds 
+          requireds
           value={email}
-          onChange={(e) => {
-            setEmail(e.target.value);
-          }}
+          onChange={handleChange}
         />
         <input
           type="text"
@@ -56,9 +62,7 @@ const Register = () => {
           placeholder="password"
           required
           value={password}
-          onChange={(e) => {
-            setPassword(e.target.value);
-          }}
+          onChange={handleChange}
         />
         <button>登録</button>
       </form>

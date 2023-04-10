@@ -1,8 +1,15 @@
 import { useState } from 'react';
 
 const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [user, setUser] = useState({ email: '', password: '' });
+  const { email, password } = user;
+
+  const handleChange = (e) => {
+    setUser({
+      ...user,
+      [e.target.name]: e.target.value,
+    });
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -15,7 +22,7 @@ const Login = () => {
             Accept: 'application/json',
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ email, password }),
+          body: JSON.stringify(user),
         }
       );
       const { message, accessToken } = await res.json();
@@ -35,9 +42,7 @@ const Login = () => {
           placeholder="email"
           required
           value={email}
-          onChange={(e) => {
-            setEmail(e.target.value);
-          }}
+          onChange={handleChange}
         />
         <input
           type="text"
@@ -45,9 +50,7 @@ const Login = () => {
           placeholder="password"
           required
           value={password}
-          onChange={(e) => {
-            setPassword(e.target.value);
-          }}
+          onChange={handleChange}
         />
         <button>ログイン</button>
       </form>
